@@ -1,24 +1,17 @@
-import {Button, StyleSheet, Text, View} from 'react-native'
+import {Button, Text, View} from 'react-native'
+
+import {GlobalStyles} from "../constants/GlobalStyles";
+import {centerScreen} from "../stylesheets/CenterScreen";
+import {welcomeScreenStyles} from "../stylesheets/screens/WelcomeScreen";
 
 const WelcomeScreen = ({navigation}) => {
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Welcome</Text>
-            <Button title="Start your journey" onPress={() => navigation.replace("Login")}/>
+        <View style={centerScreen.container}>
+            <Text style={welcomeScreenStyles.text}>Welcome</Text>
+            <Button color={GlobalStyles.colors.primary200} title="Start your journey" onPress={() => navigation.replace("Login")}/>
         </View>
     )
 }
 
 export default WelcomeScreen
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    text: {
-        paddingBottom: 50
-    }
-})
