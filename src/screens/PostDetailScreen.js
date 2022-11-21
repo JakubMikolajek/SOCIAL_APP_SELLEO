@@ -11,7 +11,7 @@ const PostDetailScreen = ({navigation, route}) => {
 
     const pressHandler = () => {
         navigation.navigate("Profile", {
-            uuid: postAuthor.uuid
+            userId: postAuthor.uuid
         })
     }
 

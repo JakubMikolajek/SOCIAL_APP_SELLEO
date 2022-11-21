@@ -3,11 +3,14 @@ import {Keyboard, KeyboardAvoidingView, Platform, Text, TouchableWithoutFeedback
 import {centerScreen} from "../stylesheets/CenterScreen";
 import RegisterForm from "../components/forms/RegisterForm";
 import {registerScreen} from "../stylesheets/screens/RegisterScreen";
+import {useContext} from "react";
+import {AuthContext} from "../store/auth-context";
 
 const RegisterScreen = ({navigation}) => {
+    const authCtx = useContext(AuthContext)
     const onSubmit = (data) => {
+        authCtx.register(data.email, data.password)
         navigation.navigate("Login")
-        console.log(data)
     }
 
     return (

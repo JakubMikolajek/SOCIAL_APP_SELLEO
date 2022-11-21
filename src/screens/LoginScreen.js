@@ -11,7 +11,7 @@ const LoginScreen = ({navigation}) => {
     const authCtx = useContext(AuthContext)
 
     const onSubmit = (data) => {
-        authCtx.login()
+        authCtx.login(data.email, data.password)
         console.log(data);
     }
 

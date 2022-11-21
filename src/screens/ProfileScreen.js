@@ -1,18 +1,27 @@
-import {Button, Text, View} from 'react-native'
-import {useContext} from "react";
-import {AuthContext} from "../store/auth-context";
+import {StyleSheet, View} from 'react-native'
 
-import {centerScreen} from "../stylesheets/CenterScreen";
+import {DUMMY_DATA} from "../../DUMMY_DATA/dummy-data";
+import Avatar from "../components/profile/Avatar";
 
-const ProfileScreen = () => {
-    const authCtx = useContext(AuthContext)
+const ProfileScreen = ({route}) => {
+    const userData = DUMMY_DATA.find((user) => user.uuid === route.params.userId)
 
     return (
-        <View style={centerScreen.container}>
-            <Text>ProfileScreen</Text>
-            <Button title="Logout" onPress={() => authCtx.logout()}/>
+        <View style={styles.container}>
+            <Avatar name={userData.name} surname={userData.surname} imageUrl={userData.imageUrl}/>
         </View>
     )
 }
 
 export default ProfileScreen
+
+const styles = StyleSheet.create({
+    container: {
+        marginTop: 100
+    },
+    buttonContainer: {
+        marginTop: 20,
+        alignSelf: "center",
+        width: 100
+    }
+})

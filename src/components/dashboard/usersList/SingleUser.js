@@ -9,10 +9,9 @@ const SingleUser = ({name, surname, imageUrl,onPress}) => {
                 <View>
                     <Image style={singleUser.image} source={{ uri: imageUrl }}/>
                 </View>
-                <Text style={singleUser.text}>{name}</Text>
-                <Text style={singleUser.text}>{surname}</Text>
+                <Text style={singleUser.text}>{name ? name : "Name"}</Text>
+                <Text style={singleUser.text}>{surname ? surname : "Surname"}</Text>
             </View>
-
         </Pressable>
     )
 }
