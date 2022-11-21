@@ -17,7 +17,9 @@ const PostsList = () => {
         }
 
         const pressHandler = () => {
-            console.log("Działa")
+            navigation.navigate("PostDetail", {
+                postId: itemData.item.id
+            })
         }
         return <SinglePost {...postProps} onPress={pressHandler}/>
     }

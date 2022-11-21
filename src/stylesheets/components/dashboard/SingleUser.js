@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import {GlobalStyles} from "../../../constants/GlobalStyles";
 
 export const singleUser = StyleSheet.create({
     container: {
@@ -11,7 +12,10 @@ export const singleUser = StyleSheet.create({
     image: {
         width: 50,
         height: 50,
-        borderRadius: 25
+        borderRadius: 25,
+        borderColor: GlobalStyles.colors.primary100,
+        borderWidth:2
+
     },
     text: {
         fontSize: 10

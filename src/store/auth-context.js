@@ -21,10 +21,14 @@ const AuthContextProvider = ({children}) => {
         setIsAuth(false)
     }
 
+    const register = async() => {
+    }
+
     const value = {
         isAuth: isAuth,
         login,
         logout,
+        register
     }
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

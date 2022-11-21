@@ -17,8 +17,8 @@ const LoginScreen = ({navigation}) => {
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <KeyboardAvoidingView style={centerScreen.container} behavior={Platform.OS === "ios" ? "padding": "height"}>
-                <View style={centerScreen.container} >
+            <KeyboardAvoidingView style={centerScreen.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                <View style={centerScreen.container}>
                     <Text style={loginScreen.text}>Login</Text>
                     <LoginForm onSubmit={onSubmit}/>
                     <Button color={GlobalStyles.colors.primary200} title="Sign up" onPress={() => navigation.navigate("Register")}/>

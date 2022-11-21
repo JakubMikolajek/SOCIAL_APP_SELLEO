@@ -20,7 +20,6 @@ const LoginForm = ({onSubmit}) => {
             password: "",
         }
     })
-
     return (
         <View style={loginForm.container}>
             <InputController

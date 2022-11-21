@@ -4,10 +4,13 @@ import SearchScreen from "../../screens/SearchScreen";
 import CreatePostScreen from "../../screens/CreatePostScreen";
 import ProfileScreen from "../../screens/ProfileScreen";
 import BarIcon from "../UI/BarIcon";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import PostDetailScreen from "../../screens/PostDetailScreen";
 
+const Stack = createNativeStackNavigator()
 const Tabs = createBottomTabNavigator()
 
-const TabsMain = () => {
+const Tab = () => {
     return (
         <Tabs.Navigator initialRouteName="Dashboard" screenOptions={{
             tabBarShowLabel: false,
@@ -26,6 +29,21 @@ const TabsMain = () => {
                 tabBarIcon: ({size, color}) => <BarIcon name="person-outline" size={size} color={color}/>
             }}/>
         </Tabs.Navigator>
+    )
+}
+
+const TabsMain = () => {
+    return (
+        <Stack.Navigator initialRouteName="Tabs">
+            <Stack.Screen name="Tabs" component={Tab} options={{
+                headerShown: false
+            }}/>
+            <Stack.Screen name="PostDetail" component={PostDetailScreen} options={{
+                headerTransparent: true,
+                title: ""
+            }}/>
+        </Stack.Navigator>
+
     )
 }
 

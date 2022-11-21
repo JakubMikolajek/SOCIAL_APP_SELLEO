@@ -6,7 +6,7 @@ const SingleUser = ({name, surname, imageUrl,onPress}) => {
         <Pressable android_ripple={{color: "#ccc"}} style={({pressed}) => (pressed ? singleUser.buttonPressed : null)}
                    onPress={onPress}>
             <View style={singleUser.container}>
-                <View style={singleUser.image}>
+                <View>
                     <Image style={singleUser.image} source={{ uri: imageUrl }}/>
                 </View>
                 <Text style={singleUser.text}>{name}</Text>
