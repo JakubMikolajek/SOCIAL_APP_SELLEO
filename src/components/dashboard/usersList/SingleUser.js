@@ -7,7 +7,7 @@ const SingleUser = ({name, surname, imageUrl,onPress}) => {
                    onPress={onPress}>
             <View style={singleUser.container}>
                 <View>
-                    <Image style={singleUser.image} source={{ uri: imageUrl }}/>
+                    <Image style={singleUser.image} source={imageUrl ? { uri: imageUrl } : require("../../../../DUMMY_DATA/profile-logo.png")}/>
                 </View>
                 <Text style={singleUser.text}>{name ? name : "Name"}</Text>
                 <Text style={singleUser.text}>{surname ? surname : "Surname"}</Text>

@@ -3,24 +3,24 @@ import SingleUser from "./SingleUser";
 import {useNavigation} from "@react-navigation/native";
 import {useContext} from "react";
 import {AuthContext} from "../../../store/auth-context";
-import {useQuery} from "@tanstack/react-query";
-import {client} from "../../../utils/supabase";
+import {getUsersData} from "../../../hooks/userDataHooks";
+import {useQueryClient} from "@tanstack/react-query";
 
 const UsersList = () => {
     const navigation = useNavigation()
     const authCtx = useContext(AuthContext)
+    const queryClient = useQueryClient()
 
-    const {isLoading, data, error, isFetching} = useQuery(['users'],() =>
-        client.from("users").select("*")
-     )
-
-    if(isLoading) return <Text>Loading...</Text>
+    const data = queryClient.getQueryData(['users'])
 
     const users = data.data
 
+    // const filter = users.find((user) => user.uuid === authCtx.ownId)
+
+    // console.log(filter)
+
     const renderUser = (itemData) => {
         const item = itemData.item
-
         const userProps = {
             name: item.first_name,
             surname: item.last_name,

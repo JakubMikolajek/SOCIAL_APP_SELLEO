@@ -24,9 +24,9 @@ const AuthContextProvider = ({children}) => {
             email: email,
             password: password,
         });
-        setOwnId(response.data.user.id)
+        await setOwnId(response.data.user.id)
         if (ownId !== "") {
-            setIsAuth(true)
+            await setIsAuth(true)
         }
 
     }

@@ -1,14 +1,21 @@
 import {StyleSheet, View} from 'react-native'
-
-import {DUMMY_DATA} from "../../DUMMY_DATA/dummy-data";
 import Avatar from "../components/profile/Avatar";
+import {useQueryClient} from "@tanstack/react-query";
 
 const ProfileScreen = ({route}) => {
-    const userData = DUMMY_DATA.find((user) => user.uuid === route.params.userId)
+    const queryClient = useQueryClient()
+
+    const data = queryClient.getQueryData(['users'])
+
+    const users = data.data
+
+     const user = users.find((user) => user.uuid === route.params.userId)
+
+    console.log(user)
 
     return (
         <View style={styles.container}>
-            <Avatar name={userData.name} surname={userData.surname} imageUrl={userData.imageUrl}/>
+            <Avatar name={user.first_name} surname={user.last_name} imageUrl={user.image_url}/>
         </View>
     )
 }
