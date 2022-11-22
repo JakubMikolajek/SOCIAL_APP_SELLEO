@@ -1,19 +1,18 @@
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native'
-import {singlePost} from "../../../stylesheets/components/dashboard/SinglePost";
-
+import {Image, Pressable, Text, View} from 'react-native'
+import {dashboardStyles} from "../../../stylesheets/components/dashboardStyles";
 
 
 const SinglePost = ({name, imageUrl, likes, onPress}) => {
     return (
-        <View style={singlePost.outercontainer}>
-            <View style={singlePost.container}>
-                <Text style={singlePost.text}>{name}</Text>
-                <Pressable android_ripple={{color: "#ccc"}} style={({pressed}) => (pressed ? styles.pressed : null)} onPress={onPress}>
-                    <View style={singlePost.image}>
-                        <Image style={singlePost.image} source={{uri: imageUrl}}/>
+        <View style={dashboardStyles.singlePost.container}>
+            <View style={dashboardStyles.singlePost.innerContainer}>
+                <Text style={dashboardStyles.singlePost.text}>{name}</Text>
+                <Pressable android_ripple={{color: "#ccc"}} style={({pressed}) => (pressed ? dashboardStyles.singlePost.pressed : null)} onPress={onPress}>
+                    <View style={dashboardStyles.singlePost.image}>
+                        <Image style={dashboardStyles.singlePost.image} source={{uri: imageUrl}}/>
                     </View>
                 </Pressable>
-                <Text>{likes} likes</Text>
+                <Text>{likes ? likes : "0"} likes</Text>
                 <Text>Somebody - add later</Text>
             </View>
         </View>
@@ -21,9 +20,3 @@ const SinglePost = ({name, imageUrl, likes, onPress}) => {
 }
 
 export default SinglePost
-
-const styles = StyleSheet.create({
-    pressed: {
-        opacity: 0.5
-    }
-})

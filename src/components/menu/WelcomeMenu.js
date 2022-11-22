@@ -2,11 +2,10 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import WelcomeScreen from "../../screens/WelcomeScreen";
 import LoginScreen from "../../screens/LoginScreen";
 import RegisterScreen from "../../screens/RegisterScreen";
-import SetDataScreen from "../../screens/SetDataScreen";
 
 const Stack = createNativeStackNavigator()
 
-const StackMain = () => {
+const WelcomeMenu = () => {
     return (
         <Stack.Navigator initialRouteName="Welcome">
             <Stack.Screen name="Welcome" component={WelcomeScreen} options={{
@@ -23,4 +22,4 @@ const StackMain = () => {
     )
 }
 
-export default StackMain
+export default WelcomeMenu

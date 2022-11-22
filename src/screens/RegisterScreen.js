@@ -2,7 +2,7 @@ import {Keyboard, KeyboardAvoidingView, Platform, Text, TouchableWithoutFeedback
 
 import {centerScreen} from "../stylesheets/CenterScreen";
 import RegisterForm from "../components/forms/RegisterForm";
-import {registerScreen} from "../stylesheets/screens/RegisterScreen";
+import {authScreenStyles} from "../stylesheets/screens/authScreenStyles";
 import {useContext} from "react";
 import {AuthContext} from "../store/auth-context";
 
@@ -17,7 +17,7 @@ const RegisterScreen = ({navigation}) => {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <KeyboardAvoidingView style={centerScreen.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
                 <View style={centerScreen.container}>
-                    <Text style={registerScreen.text}>Register</Text>
+                    <Text style={authScreenStyles.text}>Register</Text>
                     <RegisterForm onSubmit={onSubmit}/>
                 </View>
             </KeyboardAvoidingView>

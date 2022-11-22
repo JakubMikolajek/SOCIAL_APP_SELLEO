@@ -4,7 +4,7 @@ import * as yup from "yup"
 import {yupResolver} from "@hookform/resolvers/yup";
 import InputController from "./InputController";
 
-import {loginForm} from "../../stylesheets/components/forms/LoginForm";
+import {formsStyles} from "../../stylesheets/components/formsStyles";
 import {GlobalStyles} from "../../constants/GlobalStyles";
 
 const validation = yup.object().shape({
@@ -21,7 +21,7 @@ const LoginForm = ({onSubmit}) => {
         }
     })
     return (
-        <View style={loginForm.container}>
+        <View style={formsStyles.container}>
             <InputController
                 control={control}
                 name="email"
@@ -37,7 +37,7 @@ const LoginForm = ({onSubmit}) => {
                 secureTextEntry={true}
                 errors={errors.password}
             />
-            <View style={loginForm.buttonContainer}>
+            <View style={formsStyles.buttonContainer}>
                 <Button color={GlobalStyles.colors.primary200} title="Login" onPress={handleSubmit(onSubmit)}/>
             </View>
         </View>

@@ -1,40 +1,39 @@
-import {Button, StyleSheet, Text, View} from 'react-native'
+import {Button, StyleSheet, View} from 'react-native'
 import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
-import {loginForm} from "../../stylesheets/components/forms/LoginForm";
 import InputController from "./InputController";
-import {GlobalStyles} from "../../constants/GlobalStyles";
-import * as yup from "yup";
 
-const validation = yup.object().shape({
-    name: yup.string().required("Name is required"),
-    surname: yup.string().required("Surname is required")
-});
+import {formsStyles} from "../../stylesheets/components/formsStyles";
+import {GlobalStyles} from "../../constants/GlobalStyles";
 
 const DataForm = ({onSubmit}) => {
     const {control, handleSubmit, formState: {errors}} = useForm({
-        resolver: yupResolver(validation),
         defaultValues: {
             name: "",
             surname: "",
+            imageUrl: ""
         }
     })
     return (
-        <View style={loginForm.container}>
+        <View style={formsStyles.container}>
             <InputController
                 control={control}
                 name="name"
                 placeholder="Name"
                 errors={errors.name}
             />
-
             <InputController
                 control={control}
                 name="surname"
                 placeholder="Surname"
                 errors={errors.surname}
             />
-            <View style={loginForm.buttonContainer}>
+            <InputController
+                control={control}
+                name="imageUrl"
+                placeholder="ImageUrl"
+                errors={errors.imageUrl}
+            />
+            <View style={formsStyles.buttonContainer}>
                 <Button color={GlobalStyles.colors.primary200} title="Update" onPress={handleSubmit(onSubmit)}/>
             </View>
         </View>

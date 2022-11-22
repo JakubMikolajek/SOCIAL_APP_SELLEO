@@ -8,14 +8,14 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import PostDetailScreen from "../../screens/PostDetailScreen";
 import OwnProfileScreen from "../../screens/OwnProfileScreen";
 import {GlobalStyles} from "../../constants/GlobalStyles";
-import SetDataScreen from "../../screens/SetDataScreen";
+import EditUserDataScreen from "../../screens/EditUserDataScreen";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 const queryClient = new QueryClient()
 const Stack = createNativeStackNavigator()
 const Tabs = createBottomTabNavigator()
 
-const Tab = () => {
+const TabsMenu = () => {
     return (
         <Tabs.Navigator initialRouteName="Dashboard" screenOptions={{
             tabBarShowLabel: false,
@@ -38,11 +38,11 @@ const Tab = () => {
     )
 }
 
-const TabsMain = () => {
+const AuthMenu = () => {
     return (
         <QueryClientProvider client={queryClient}>
             <Stack.Navigator initialRouteName="Tabs">
-                <Stack.Screen name="Tabs" component={Tab} options={{
+                <Stack.Screen name="Tabs" component={TabsMenu} options={{
                     headerShown: false
                 }}/>
                 <Stack.Screen name="PostDetail" component={PostDetailScreen} options={{
@@ -53,8 +53,9 @@ const TabsMain = () => {
                     headerTransparent: true,
                     title: ""
                 }}/>
-                <Stack.Screen name="UpadateData" component={SetDataScreen} options={{
-                    headerShown: false
+                <Stack.Screen name="UpadateData" component={EditUserDataScreen} options={{
+                    headerTransparent: true,
+                    title: ""
                 }}/>
             </Stack.Navigator>
         </QueryClientProvider>
@@ -62,5 +63,5 @@ const TabsMain = () => {
     )
 }
 
-export default TabsMain
+export default AuthMenu
 

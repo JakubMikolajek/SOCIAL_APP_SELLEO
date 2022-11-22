@@ -1,16 +1,16 @@
 import {Image, Pressable,Text, View} from 'react-native'
-import {singleUser} from "../../../stylesheets/components/dashboard/SingleUser";
+import {dashboardStyles} from "../../../stylesheets/components/dashboardStyles";
 
 const SingleUser = ({name, surname, imageUrl,onPress}) => {
     return (
-        <Pressable android_ripple={{color: "#ccc"}} style={({pressed}) => (pressed ? singleUser.buttonPressed : null)}
+        <Pressable android_ripple={{color: "#ccc"}} style={({pressed}) => (pressed ? dashboardStyles.singleUser.buttonPressed : null)}
                    onPress={onPress}>
-            <View style={singleUser.container}>
+            <View style={dashboardStyles.singleUser.container}>
                 <View>
-                    <Image style={singleUser.image} source={imageUrl ? { uri: imageUrl } : require("../../../../DUMMY_DATA/profile-logo.png")}/>
+                    <Image style={dashboardStyles.singleUser.image} source={imageUrl ? { uri: imageUrl } : require("../../../../DUMMY_DATA/profile-logo.png")}/>
                 </View>
-                <Text style={singleUser.text}>{name ? name : "Name"}</Text>
-                <Text style={singleUser.text}>{surname ? surname : "Surname"}</Text>
+                <Text style={dashboardStyles.singleUser.text}>{name ? name : "Name"}</Text>
+                <Text style={dashboardStyles.singleUser.text}>{surname ? surname : "Surname"}</Text>
             </View>
         </Pressable>
     )

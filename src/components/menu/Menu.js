@@ -1,6 +1,6 @@
 import {NavigationContainer} from "@react-navigation/native";
-import StackMain from "./StackMain";
-import TabsMain from "./TabsMain";
+import WelcomeMenu from "./WelcomeMenu";
+import AuthMenu from "./AuthMenu";
 import {useContext} from "react";
 import {AuthContext} from "../../store/auth-context";
 
@@ -10,7 +10,7 @@ const Menu = () => {
 
     return (
         <NavigationContainer>
-            {isAuth ? (<TabsMain/>) : (<StackMain/>)}
+            {isAuth ? (<AuthMenu/>) : (<WelcomeMenu/>)}
         </NavigationContainer>
     )
 }

@@ -2,7 +2,7 @@ import {Text} from 'react-native'
 import {Controller} from "react-hook-form";
 import Input from "../UI/Input";
 
-import {inputController} from "../../stylesheets/components/forms/InputController";
+import {formsStyles} from "../../stylesheets/components/formsStyles";
 
 const InputController = ({control, errors, placeholder, name, keyboardType, secureTextEntry}) => {
     return (
@@ -22,7 +22,7 @@ const InputController = ({control, errors, placeholder, name, keyboardType, secu
                 )}
                 name={name}
             />
-            {errors && <Text style={inputController.errorMessage}>{errors?.message}</Text>}
+            {errors && <Text style={formsStyles.errorMessage}>{errors?.message}</Text>}
         </>
     )
 }

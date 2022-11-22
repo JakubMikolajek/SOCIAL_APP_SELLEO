@@ -1,6 +1,10 @@
 import {StyleSheet} from "react-native";
+import {GlobalStyles} from "../../constants/GlobalStyles";
 
-export const registerForm = StyleSheet.create({
+export const formsStyles = StyleSheet.create({
+    errorMessage:{
+        color: GlobalStyles.colors.error
+    },
     container:{
         width:200,
         marginVertical:24

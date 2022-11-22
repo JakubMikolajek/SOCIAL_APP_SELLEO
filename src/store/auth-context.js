@@ -11,8 +11,6 @@ export const AuthContext = createContext({
     },
     register: (email, password) => {
     },
-    updateData: (name, surname) => {
-    }
 })
 
 const AuthContextProvider = ({children}) => {
@@ -43,20 +41,11 @@ const AuthContextProvider = ({children}) => {
         });
     }
 
-    const updateData = async(name,surname) => {
-        const response = await client.from("users").update({
-            uuid: ownId,
-            first_name: null,
-            last_name: null
-        })
-    }
-
     const value = {
         isAuth: isAuth,
         login,
         logout,
         register,
-        updateData,
         ownId: ownId
     }
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

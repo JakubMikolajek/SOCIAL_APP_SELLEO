@@ -1,28 +1,49 @@
-import {Button, StyleSheet, View} from 'react-native'
-import {useContext} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {Button, StyleSheet, View, Dimensions, Switch, Text} from 'react-native'
+import {useContext, useState} from "react";
 import {AuthContext} from "../store/auth-context";
 import Avatar from "../components/profile/Avatar";
-import {useQueryClient} from "@tanstack/react-query"
+import {useQuery} from "@tanstack/react-query"
 
 import {GlobalStyles} from "../constants/GlobalStyles";
+import {getCurrentUser} from "../helpers/userDataHelpers";
+import GridPostList from "../components/profile/GridPostList";
+import PostsListsAlt from "../components/dashboard/postsList/PostsListsAlt";
 
-const OwnProfileScreen = () => {
+const windowWidth = Dimensions.get("window").width
+const windowHeight = Dimensions.get("window").height
+
+const OwnProfileScreen = ({navigation}) => {
+    const [enable, setEnable] = useState(false)
+    const toggleSwitch = () => setEnable(prevState => !prevState)
     const authCtx = useContext(AuthContext)
-    const queryClient = useQueryClient()
-
-    const loginUserData = queryClient.getQueryData(['loginUser'])
+    const {isLoading, data } = useQuery(['loginUser'], () => getCurrentUser(authCtx.ownId));
+    const userData = data?.data;
 
     const logoutHandler = () => {
-        AsyncStorage.clear
         authCtx.logout()
     }
 
+    const editProfileHandler = () => {
+        navigation.navigate("UpadateData")
+    }
+
+    if(isLoading) {
+        return null
+    }
     return (
         <View style={styles.container}>
-            <Avatar name={loginUserData.data.first_name} surname={loginUserData.data.last_name} imageUrl={loginUserData.data.image_url}/>
-            <View style={styles.buttonContainer}>
-                <Button color={GlobalStyles.colors.primary200} title="Logout" onPress={logoutHandler}/>
+            <View>
+                <Avatar name={userData.first_name} surname={userData.last_name} imageUrl={userData.image_url}/>
+                <View style={styles.buttonContainer}>
+                    <Button color={GlobalStyles.colors.primary200} title="Logout" onPress={logoutHandler}/>
+                </View>
+                <View style={styles.buttonContainerAlt}>
+                    <Button style={styles.button} color={GlobalStyles.colors.primary100} title="Edit profile" onPress={editProfileHandler}/>
+                </View>
+            </View>
+            <View style={styles.gridContainer}>
+                <Switch trackColor={{false: GlobalStyles.colors.primary100, true: GlobalStyles.colors.primary200}} thumbColor={enable ? GlobalStyles.colors.primary100 : GlobalStyles.colors.primary200} onValueChange={toggleSwitch} value={enable} style={{left:120}}/>
+                {!enable ? <GridPostList/> : <PostsListsAlt/>}
             </View>
         </View>
     )
@@ -32,11 +53,24 @@ export default OwnProfileScreen
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 100
+        marginTop: 100,
     },
     buttonContainer: {
         marginTop: 20,
         alignSelf: "center",
         width: 100
+    },
+    buttonContainerAlt: {
+        marginTop: 20,
+        alignSelf: "center",
+        width: 150
+    },
+    gridContainer:{
+        bottom: 40,
+        marginTop:20,
+        alignItems:"center",
+        width: windowWidth,
+        height: windowHeight/2
     }
+
 })

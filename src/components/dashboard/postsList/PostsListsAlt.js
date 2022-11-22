@@ -4,10 +4,12 @@ import SinglePost from "./SinglePost";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {getPostsData} from "../../../helpers/postDataHelpers";
 import {getUsersData} from "../../../helpers/userDataHelpers";
+import {useContext} from "react";
+import {AuthContext} from "../../../store/auth-context";
 
-import {dashboardStyles} from "../../../stylesheets/components/dashboardStyles";
 
-const PostsList = () => {
+const PostsListsAlt = () => {
+    const authCtx = useContext(AuthContext)
     const navigation = useNavigation()
     const queryClient = useQueryClient()
 
@@ -21,12 +23,14 @@ const PostsList = () => {
     const post = postData.data
     const user = userData.data
 
+    const ownPost = post.filter((post) => post.creator_uuid === authCtx.ownId)
+
     const renderPost = (itemData) => {
         const item = itemData.item
 
         const users = queryClient.getQueryData(['users'])
         const usersData = users.data
-        const user = usersData.find((user) => user.uuid === item.creator_uuid)
+        const user = usersData.find((user) => user.uuid === authCtx.ownId)
 
         const postProps = {
             name: user.first_name,
@@ -50,9 +54,9 @@ const PostsList = () => {
         return <SinglePost {...postProps} onPress={pressHandler}/>
     }
     return (
-        <FlatList style={dashboardStyles.singlePost.form} data={post} keyExtractor={(item) => item.id} renderItem={renderPost}
+        <FlatList data={ownPost} keyExtractor={(item) => item.id} renderItem={renderPost}
                   showsVerticalScrollIndicator={false}/>
     )
 }
 
-export default PostsList
+export default PostsListsAlt

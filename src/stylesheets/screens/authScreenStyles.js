@@ -1,7 +1,7 @@
 import {StyleSheet} from "react-native";
 import {GlobalStyles} from "../../constants/GlobalStyles";
 
-export const loginScreen = StyleSheet.create({
+export const authScreenStyles = StyleSheet.create({
     text:{
         color: GlobalStyles.colors.primary100,
         fontSize:24,

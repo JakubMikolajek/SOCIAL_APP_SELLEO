@@ -4,8 +4,8 @@ import * as yup from "yup"
 import InputController from "./InputController";
 import {yupResolver} from "@hookform/resolvers/yup";
 
+import {formsStyles} from "../../stylesheets/components/formsStyles";
 import {GlobalStyles} from "../../constants/GlobalStyles";
-import {registerForm} from "../../stylesheets/components/forms/RegisterForm";
 
 const validation = yup.object().shape({
     email: yup.string().required("Email is required").email("Email must contain @"),
@@ -23,7 +23,7 @@ const RegisterForm = ({onSubmit}) => {
         }
     })
     return (
-        <View style={registerForm.container}>
+        <View style={formsStyles.container}>
             <InputController
                 control={control}
                 name="email"
@@ -47,7 +47,7 @@ const RegisterForm = ({onSubmit}) => {
                 secureTextEntry={true}
                 errors={errors.confirmPassword}
             />
-            <View style={registerForm.buttonContainer}>
+            <View style={formsStyles.buttonContainer}>
                 <Button color={GlobalStyles.colors.primary200} title="Register" onPress={handleSubmit(onSubmit)}/>
             </View>
         </View>

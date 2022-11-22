@@ -4,14 +4,9 @@ import {useQueryClient} from "@tanstack/react-query";
 
 const ProfileScreen = ({route}) => {
     const queryClient = useQueryClient()
-
     const data = queryClient.getQueryData(['users'])
-
     const users = data.data
-
-     const user = users.find((user) => user.uuid === route.params.userId)
-
-    console.log(user)
+    const user = users.find((user) => user.uuid === route.params.userId)
 
     return (
         <View style={styles.container}>
