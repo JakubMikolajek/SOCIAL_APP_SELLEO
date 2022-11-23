@@ -1,9 +1,13 @@
-import {FlatList} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native'
 import {useQuery} from "@tanstack/react-query";
 import {getPostsData} from "../../helpers/postDataHelpers";
-import SingleGridItem from "./SingleGridItem";
 
-const GridPostList = ({userId}) => {
+import SingleGridItem from "./SingleGridItem";
+import {useContext} from "react";
+import {AuthContext} from "../../store/auth-context";
+
+const GridPostListAlt = () => {
+    const authCtx = useContext(AuthContext)
 
     const {isLoading, data} = useQuery(['posts'], () => getPostsData())
 
@@ -12,7 +16,7 @@ const GridPostList = ({userId}) => {
     }
 
     const post = data.data
-    const ownPost = post.filter((post) => post.creator_uuid === userId)
+    const ownPost = post.filter((post) => post.creator_uuid === authCtx.ownId)
 
     const renderPost = (itemData) => {
         const item = itemData.item
@@ -31,5 +35,6 @@ const GridPostList = ({userId}) => {
     )
 }
 
-export default GridPostList
+export default GridPostListAlt
 
+const styles = StyleSheet.create({})

@@ -1,19 +1,11 @@
 import {ActivityIndicator, FlatList} from 'react-native'
-import {useNavigation} from "@react-navigation/native";
 import SinglePost from "./SinglePost";
-import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {useQuery} from "@tanstack/react-query";
 import {getPostsData} from "../../../helpers/postDataHelpers";
 import {getUsersData} from "../../../helpers/userDataHelpers";
-import {useContext} from "react";
-import {AuthContext} from "../../../store/auth-context";
 import {GlobalStyles} from "../../../constants/GlobalStyles";
 
-
-const PostsListsAlt = () => {
-    const authCtx = useContext(AuthContext)
-    const navigation = useNavigation()
-    const queryClient = useQueryClient()
-
+const OwnPostsList = ({userId}) => {
     const {isLoading: isPostLoading, data: postData} = useQuery(['posts'], () => getPostsData());
     const {isLoading: isUserLoading,} = useQuery(['users'], () => getUsersData());
 
@@ -23,7 +15,7 @@ const PostsListsAlt = () => {
 
     const post = postData.data
 
-    const ownPost = post.filter((post) => post.creator_uuid === authCtx.ownId)
+    const ownPost = post.filter((post) => post.creator_uuid === userId)
 
     const renderPost = (itemData) => {
         const item = itemData.item
@@ -43,4 +35,4 @@ const PostsListsAlt = () => {
     )
 }
 
-export default PostsListsAlt
+export default OwnPostsList

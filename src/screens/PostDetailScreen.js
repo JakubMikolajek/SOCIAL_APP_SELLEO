@@ -1,8 +1,11 @@
-import {Image, StyleSheet, Text, View} from 'react-native'
+import {Button, Image, StyleSheet, Text, TextInput, View} from 'react-native'
 import SingleUser from "../components/dashboard/usersList/SingleUser";
-import {useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {getUsersData} from "../helpers/userDataHelpers";
-import {getPostsData} from "../helpers/postDataHelpers";
+import {addComment, getPostsData} from "../helpers/postDataHelpers";
+import CommentsList from "../components/dashboard/postsList/CommentsList";
+import {input} from "../stylesheets/components/ui/Input";
+import {useState} from "react";
 
 const PostDetailScreen = ({navigation, route}) => {
     const postId = route.params.postId
@@ -14,12 +17,33 @@ const PostDetailScreen = ({navigation, route}) => {
     const users = userData.data
     const singlePost = posts.find((post) => post.id === postId)
     const postOwner = users.find((user) => user.uuid === creatorId)
+    const comments = singlePost.comments
 
+    const [text, setText] = useState("")
+    const client = useQueryClient()
+
+    const mutation = useMutation({
+        mutationFn: (body) => {
+            return addComment(postId, body)
+        },
+        onError: () => {
+            console.log('onError')
+        },
+        onSuccess: async () => {
+            await client.invalidateQueries(['posts'])
+        }
+    })
 
     const pressHandler = () => {
         navigation.navigate("Profile", {
             userId: postOwner.uuid
         })
+    }
+
+    const sendComment = () => {
+        mutation.mutate(text)
+        setText("")
+
     }
 
     return (
@@ -34,12 +58,12 @@ const PostDetailScreen = ({navigation, route}) => {
                 </View>
             </View>
             <View>
-                <Text>Comments in future</Text>
-                <Text>Comments in future</Text>
-                <Text>Comments in future</Text>
-                <Text>Comments in future</Text>
+                {comments.length > 0 ? <CommentsList comments={comments} postId={postId}/>: <Text>Nie ma komentarzy</Text>}
             </View>
-            <Text>Here will be add comments input</Text>
+            <View>
+                <TextInput style={input.input} value={text} onChangeText={(e) => setText(e)} placeholder="Comment..."/>
+                <Button title="Add comment" onPress={sendComment}/>
+            </View>
         </View>
     )
 }

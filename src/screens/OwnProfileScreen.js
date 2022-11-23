@@ -3,11 +3,10 @@ import {useContext, useState} from "react";
 import {AuthContext} from "../store/auth-context";
 import Avatar from "../components/profile/Avatar";
 import {useQuery} from "@tanstack/react-query"
-
-import {GlobalStyles} from "../constants/GlobalStyles";
 import {getCurrentUser} from "../helpers/userDataHelpers";
-import GridPostList from "../components/profile/GridPostList";
-import PostsListsAlt from "../components/dashboard/postsList/PostsListsAlt";
+import GridPostListAlt from "../components/profile/GridPostListAlt";
+import OwnPostsListAlt from "../components/dashboard/postsList/OwnPostsListAlt";
+import {GlobalStyles} from "../constants/GlobalStyles";
 
 const windowWidth = Dimensions.get("window").width
 const windowHeight = Dimensions.get("window").height
@@ -43,7 +42,7 @@ const OwnProfileScreen = ({navigation}) => {
             </View>
             <View style={styles.gridContainer}>
                 <Switch trackColor={{false: GlobalStyles.colors.primary100, true: GlobalStyles.colors.primary200}} thumbColor={enable ? GlobalStyles.colors.primary100 : GlobalStyles.colors.primary200} onValueChange={toggleSwitch} value={enable} style={{left:120}}/>
-                {!enable ? <GridPostList/> : <PostsListsAlt/>}
+                {!enable ? <GridPostListAlt/> : <OwnPostsListAlt/>}
             </View>
         </View>
     )
