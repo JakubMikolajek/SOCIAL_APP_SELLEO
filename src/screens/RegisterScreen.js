@@ -1,6 +1,4 @@
 import {Keyboard, KeyboardAvoidingView, Platform, Text, TouchableWithoutFeedback, View} from 'react-native'
-
-import {centerScreen} from "../stylesheets/CenterScreen";
 import RegisterForm from "../components/forms/RegisterForm";
 import {authScreenStyles} from "../stylesheets/screens/authScreenStyles";
 import {useContext} from "react";
@@ -14,14 +12,14 @@ const RegisterScreen = ({navigation}) => {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <KeyboardAvoidingView style={centerScreen.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-                <View style={centerScreen.innerContainer}>
+        <KeyboardAvoidingView style={authScreenStyles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                <View style={authScreenStyles.innerContainer}>
                     <Text style={authScreenStyles.text}>Register</Text>
                     <RegisterForm onSubmit={onSubmit}/>
                 </View>
-            </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     )
 }
 

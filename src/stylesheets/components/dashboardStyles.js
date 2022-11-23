@@ -10,21 +10,29 @@ export const dashboardStyles = StyleSheet.create({
             alignItems: 'center',
             width: windowWidth,
             borderBottomWidth: 1,
-            borderColor: "#cacaca"
+            borderColor: GlobalStyles.colors.primary100
         },
         innerContainer: {
             marginVertical: 10,
-            width: 300,
-            height: 300,
+            width: windowWidth,
+        },
+        textContainer:{
+            marginLeft: 20,
+        },
+        textContainerAlt: {
+            height: 100,
+            justifyContent: "center"
         },
         image: {
             alignSelf: "center",
-            width: 300,
-            height: 225,
+            width: windowWidth * 0.95,
+            height: 300,
         },
-        text: {
+        nameText: {
             fontSize: 16,
-            color: GlobalStyles.colors.black
+            fontWeight:"600",
+            color: GlobalStyles.colors.black,
+            marginBottom: 10,
         },
         pressed: {
             opacity: 0.5
@@ -54,6 +62,43 @@ export const dashboardStyles = StyleSheet.create({
         },
         buttonPressed: {
             opacity: 0.5
+        }
+    },
+    comments:{
+        container:{
+            height: windowHeight * 0.3
+        },
+        singleCommentContainer:{
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "row"
+        },
+        margin:{
+            marginLeft: 10
+        },
+        image:{
+            width:30,
+            height:30,
+            borderRadius: 75,
+            borderColor: GlobalStyles.colors.primary200
+        },
+        pressed:{
+            opacity: 0.5
+        }
+    },
+    gridPost:{
+        container: {
+            alignItems: "center",
+            alignSelf: "center",
+            justifyContent: "center",
+            margin: 5,
+        },
+        pressed: {
+            opacity: 0.5
+        },
+        image: {
+            width: 100,
+            height: 100
         }
     }
 })

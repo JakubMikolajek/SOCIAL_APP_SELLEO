@@ -1,7 +1,7 @@
-import {Dimensions, FlatList, StyleSheet, View} from 'react-native'
+import {FlatList, View} from 'react-native'
 import SingleComment from "./SingleComment";
+import {dashboardStyles} from "../../stylesheets/components/dashboardStyles";
 
-const windowHeight = Dimensions.get("window").height
 
 const CommentsList = ({comments}) => {
 
@@ -18,7 +18,7 @@ const CommentsList = ({comments}) => {
 
     return (
         <>
-            <View style={styles.container}>
+            <View style={dashboardStyles.comments.container}>
                 <FlatList data={comments} keyExtractor={(comment) => comment.id} renderItem={renderComments}/>
             </View>
         </>
@@ -26,9 +26,3 @@ const CommentsList = ({comments}) => {
 }
 
 export default CommentsList
-
-const styles = StyleSheet.create({
-    container: {
-        height: windowHeight * 0.3
-    }
-})

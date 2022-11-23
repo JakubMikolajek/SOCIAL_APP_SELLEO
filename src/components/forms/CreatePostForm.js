@@ -1,4 +1,4 @@
-import {Button, StyleSheet, View} from 'react-native'
+import {Button, View} from 'react-native'
 import {useForm} from "react-hook-form";
 import {formsStyles} from "../../stylesheets/components/formsStyles";
 import InputController from "./InputController";
@@ -11,7 +11,7 @@ const validation = yup.object().shape({
 });
 
 const CreatePostForm = ({onSubmit}) => {
-    const {control, handleSubmit, formState: {errors}, reset} = useForm({
+    const {control, handleSubmit, formState: {errors}} = useForm({
         resolver: yupResolver(validation),
         defaultValues: {
             description: "",
@@ -42,5 +42,3 @@ const CreatePostForm = ({onSubmit}) => {
 }
 
 export default CreatePostForm
-
-const styles = StyleSheet.create({})

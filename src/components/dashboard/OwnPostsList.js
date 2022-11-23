@@ -1,9 +1,9 @@
 import {ActivityIndicator, FlatList} from 'react-native'
 import SinglePost from "./SinglePost";
 import {useQuery} from "@tanstack/react-query";
-import {getPostsData} from "../../../helpers/postDataHelpers";
-import {getUsersData} from "../../../helpers/userDataHelpers";
-import {GlobalStyles} from "../../../constants/GlobalStyles";
+import {getPostsData} from "../../helpers/postDataHelpers";
+import {getUsersData} from "../../helpers/userDataHelpers";
+import {GlobalStyles} from "../../constants/GlobalStyles";
 
 const OwnPostsList = ({userId}) => {
     const {isLoading: isPostLoading, data: postData} = useQuery(['posts'], () => getPostsData());

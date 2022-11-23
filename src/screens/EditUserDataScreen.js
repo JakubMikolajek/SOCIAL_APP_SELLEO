@@ -2,17 +2,16 @@ import {
     Keyboard,
     KeyboardAvoidingView,
     Platform,
-    StyleSheet,
     TouchableWithoutFeedback,
     View
 } from 'react-native'
-import {centerScreen} from "../stylesheets/CenterScreen";
 import {useNavigation} from "@react-navigation/native";
-import EditDataForm from "../components/forms/EditDataForm";
 import {useContext} from "react";
 import {AuthContext} from "../store/auth-context";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {updateCurrentUser} from "../helpers/userDataHelpers";
+import EditDataForm from "../components/forms/EditDataForm";
+import {profileScreen} from "../stylesheets/screens/ProfileScreen";
 
 const EditUserDataScreen = () => {
     const authCtx = useContext(AuthContext)
@@ -39,18 +38,18 @@ const EditUserDataScreen = () => {
 
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <KeyboardAvoidingView style={centerScreen.container}
-                                  behavior={Platform.OS === "ios" ? "padding" : "height"}>
-                <View style={centerScreen.container}>
+        <KeyboardAvoidingView style={profileScreen.container}
+                              behavior={Platform.OS === "ios" ? "padding" : "height"}>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+
+                <View style={[profileScreen.container, profileScreen.center]}>
                     <EditDataForm onSubmit={onSubmit}/>
                 </View>
-            </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     )
 
 }
 
 export default EditUserDataScreen
-
-const styles = StyleSheet.create({})

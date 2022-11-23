@@ -1,20 +1,18 @@
-import {ActivityIndicator, FlatList, Text} from 'react-native'
+import {FlatList} from 'react-native'
 import SingleUser from "./SingleUser";
 import {useNavigation} from "@react-navigation/native";
-import {getUsersData} from "../../../helpers/userDataHelpers";
+import {getUsersData} from "../../helpers/userDataHelpers";
 import {useQuery} from "@tanstack/react-query";
-
-import {dashboardStyles} from "../../../stylesheets/components/dashboardStyles";
-import {GlobalStyles} from "../../../constants/GlobalStyles";
+import {dashboardStyles} from "../../stylesheets/components/dashboardStyles";
 
 const UsersList = () => {
     const navigation = useNavigation()
     const {isLoading, data} = useQuery(['users'], () => getUsersData());
-
+    const users = data.data
     if (isLoading) {
         return null
     }
-    const users = data.data
+
 
     const renderUser = (itemData) => {
         const item = itemData.item

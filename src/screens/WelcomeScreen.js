@@ -1,7 +1,5 @@
-import {ActivityIndicator, Button, Text, View} from 'react-native'
-
+import {Button, Text, View} from 'react-native'
 import {GlobalStyles} from "../constants/GlobalStyles";
-import {centerScreen} from "../stylesheets/CenterScreen";
 import {welcomeScreenStyles} from "../stylesheets/screens/WelcomeScreen";
 
 const WelcomeScreen = ({navigation}) => {

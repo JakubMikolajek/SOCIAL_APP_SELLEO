@@ -2,16 +2,23 @@ import {StyleSheet} from "react-native";
 import {GlobalStyles} from "../../constants/GlobalStyles";
 
 export const formsStyles = StyleSheet.create({
-    errorMessage:{
+    errorMessage: {
         color: GlobalStyles.colors.error
     },
-    container:{
-        width:200,
-        marginVertical:24
+    errorContainer:{
+        padding:10
     },
-    buttonContainer:{
-        marginTop:20,
-        width:100,
-        alignSelf:"center"
+    container: {
+        width: 200,
+        marginVertical: 24
+    },
+    buttonContainer: {
+        marginTop: 20,
+        width: 100,
+        alignSelf: "center"
+    },
+    controlContainer: {
+        width: 200,
+        height: 100
     }
 })

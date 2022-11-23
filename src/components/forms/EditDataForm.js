@@ -1,7 +1,6 @@
 import {Button, View} from 'react-native'
 import {useForm} from "react-hook-form";
 import InputController from "./InputController";
-
 import {formsStyles} from "../../stylesheets/components/formsStyles";
 import {GlobalStyles} from "../../constants/GlobalStyles";
 

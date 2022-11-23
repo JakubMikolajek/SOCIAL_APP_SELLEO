@@ -1,7 +1,7 @@
 import {FlatList} from 'react-native'
 import SinglePost from "./SinglePost";
 import {useQuery} from "@tanstack/react-query";
-import {getPostsData} from "../../../helpers/postDataHelpers";
+import {getPostsData} from "../../helpers/postDataHelpers";
 
 
 const PostsList = () => {
@@ -14,12 +14,13 @@ const PostsList = () => {
     const renderPost = (itemData) => {
         const item = itemData.item
 
+        const lastComment = item.comments[item.comments.length-1]
+
         const postProps = {
             creatorId: item.creator_uuid,
             id: item.id,
             imageUrl: item.image_url,
-            likes: item.likes,
-            comments: item.comments
+            comments: lastComment
         }
 
         return <SinglePost {...postProps}/>

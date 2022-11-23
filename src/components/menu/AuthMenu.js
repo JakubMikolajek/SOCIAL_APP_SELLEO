@@ -1,15 +1,15 @@
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import DashboardScreen from "../../screens/DashboardScreen";
 import SearchScreen from "../../screens/SearchScreen";
 import CreatePostScreen from "../../screens/CreatePostScreen";
 import ProfileScreen from "../../screens/ProfileScreen";
 import BarIcon from "../UI/BarIcon";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import PostDetailScreen from "../../screens/PostDetailScreen";
 import OwnProfileScreen from "../../screens/OwnProfileScreen";
-import {GlobalStyles} from "../../constants/GlobalStyles";
 import EditUserDataScreen from "../../screens/EditUserDataScreen";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {GlobalStyles} from "../../constants/GlobalStyles";
 
 const queryClient = new QueryClient()
 const Stack = createNativeStackNavigator()

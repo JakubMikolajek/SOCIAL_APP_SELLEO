@@ -1,11 +1,12 @@
 import {View} from 'react-native'
-import UsersList from "../components/dashboard/usersList/UsersList";
-import PostsList from "../components/dashboard/postsList/PostsList";
+import UsersList from "../components/dashboard/UsersList";
+import PostsList from "../components/dashboard/PostsList";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {useQuery} from "@tanstack/react-query";
 import {getPostsData} from "../helpers/postDataHelpers";
 import {getUsersData} from "../helpers/userDataHelpers";
 import Loader from "../components/UI/Loader";
+import {dashboardScreen} from "../stylesheets/screens/DashboardScreen";
 
 const DashboardScreen = () => {
 
@@ -17,11 +18,11 @@ const DashboardScreen = () => {
     }
 
     return (
-        <SafeAreaView style={{flex: 1}}>
-            <View style={{flex: 1}}>
+        <SafeAreaView style={dashboardScreen.container}>
+            <View style={dashboardScreen.userList}>
                 <UsersList/>
             </View>
-            <View style={{flex: 6}}>
+            <View style={dashboardScreen.postList}>
                 <PostsList/>
             </View>
         </SafeAreaView>

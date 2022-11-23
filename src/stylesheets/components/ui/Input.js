@@ -3,7 +3,9 @@ import {GlobalStyles} from "../../../constants/GlobalStyles";
 
 export const input = StyleSheet.create({
     inputContainer: {
-        marginVertical: 8,
+        width:200,
+        height:50,
+        margin: 8,
     },
     text: {
         color: GlobalStyles.colors.primary100,

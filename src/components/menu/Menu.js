@@ -1,8 +1,8 @@
 import {NavigationContainer} from "@react-navigation/native";
-import WelcomeMenu from "./WelcomeMenu";
-import AuthMenu from "./AuthMenu";
 import {useContext} from "react";
 import {AuthContext} from "../../store/auth-context";
+import AuthMenu from "./AuthMenu";
+import WelcomeMenu from "./WelcomeMenu";
 
 const Menu = () => {
     const authCtx = useContext(AuthContext)

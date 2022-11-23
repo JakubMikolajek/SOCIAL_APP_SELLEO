@@ -3,7 +3,6 @@ import {useForm} from "react-hook-form";
 import * as yup from "yup"
 import {yupResolver} from "@hookform/resolvers/yup";
 import InputController from "./InputController";
-
 import {formsStyles} from "../../stylesheets/components/formsStyles";
 import {GlobalStyles} from "../../constants/GlobalStyles";
 

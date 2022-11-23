@@ -1,9 +1,9 @@
 import {Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View} from 'react-native'
 import {SafeAreaView} from "react-native-safe-area-context";
-import {centerScreen} from "../stylesheets/CenterScreen";
-import CreatePostForm from "../components/forms/CreatePostForm";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {createPost} from "../helpers/postDataHelpers";
+import CreatePostForm from "../components/forms/CreatePostForm";
+import {createPostScreen} from "../stylesheets/screens/CreatePostScreen";
 
 const CreatePostScreen = ({navigation}) => {
     const client = useQueryClient()
@@ -25,16 +25,17 @@ const CreatePostScreen = ({navigation}) => {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <KeyboardAvoidingView style={centerScreen.container}
-                                  behavior={Platform.OS === "ios" ? "padding" : "height"}>
-                <SafeAreaView>
-                    <View style={centerScreen.container}>
+
+        <KeyboardAvoidingView style={createPostScreen.container}
+                              behavior={Platform.OS === "ios" ? "padding" : "height"}>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                <SafeAreaView style={createPostScreen.innerContainer}>
+                    <View style={createPostScreen.innerContainer}>
                         <CreatePostForm onSubmit={onSubmit}/>
                     </View>
                 </SafeAreaView>
-            </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     )
 }
 

@@ -1,10 +1,10 @@
 import {Image, Pressable, Text, View} from 'react-native'
-import {dashboardStyles} from "../../../stylesheets/components/dashboardStyles";
 import {useQuery} from "@tanstack/react-query";
-import {getUsersData} from "../../../helpers/userDataHelpers";
+import {getUsersData} from "../../helpers/userDataHelpers";
 import {useNavigation} from "@react-navigation/native";
+import {dashboardStyles} from "../../stylesheets/components/dashboardStyles";
 
-const SinglePost = ({creatorId, id, imageUrl, likes}) => {
+const SinglePost = ({creatorId, id, imageUrl, comments}) => {
     const navigation = useNavigation()
 
     const {data: userData} = useQuery(['users'], () => getUsersData(), {enabled:false});
@@ -20,7 +20,9 @@ const SinglePost = ({creatorId, id, imageUrl, likes}) => {
     return (
         <View style={dashboardStyles.singlePost.container}>
             <View style={dashboardStyles.singlePost.innerContainer}>
-                <Text style={dashboardStyles.singlePost.text}>{postOwner.first_name}</Text>
+                <View style={dashboardStyles.singlePost.textContainer}>
+                    <Text style={dashboardStyles.singlePost.nameText}>{postOwner.first_name}</Text>
+                </View>
                 <Pressable android_ripple={{color: "#ccc"}}
                            style={({pressed}) => (pressed ? dashboardStyles.singlePost.pressed : null)}
                            onPress={pressHandler}>
@@ -28,8 +30,10 @@ const SinglePost = ({creatorId, id, imageUrl, likes}) => {
                         <Image style={dashboardStyles.singlePost.image} source={{uri: imageUrl}}/>
                     </View>
                 </Pressable>
-                <Text>{likes ? likes : "0"} likes</Text>
-                <Text>Last comment:</Text>
+                <View style={[dashboardStyles.singlePost.textContainer, dashboardStyles.singlePost.textContainerAlt]}>
+                    <Text>likes</Text>
+                    <Text>Last comment: {comments ? comments.body : null}</Text>
+                </View>
             </View>
         </View>
     )

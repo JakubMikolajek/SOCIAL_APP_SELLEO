@@ -1,4 +1,4 @@
-import {StyleSheet, TextInput, View} from 'react-native'
+import {TextInput, View} from 'react-native'
 
 const SearchInput = ({search}) => {
   return (
@@ -9,5 +9,3 @@ const SearchInput = ({search}) => {
 }
 
 export default SearchInput
-
-const styles = StyleSheet.create({})

@@ -2,8 +2,6 @@ import {Button, Text, TouchableWithoutFeedback, View, Keyboard, KeyboardAvoiding
 import {useContext} from "react";
 import {AuthContext} from "../store/auth-context";
 import LoginForm from "../components/forms/LoginForm";
-
-import {centerScreen} from "../stylesheets/CenterScreen";
 import {GlobalStyles} from "../constants/GlobalStyles";
 import {authScreenStyles} from "../stylesheets/screens/authScreenStyles";
 
@@ -15,15 +13,18 @@ const LoginScreen = ({navigation}) => {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <KeyboardAvoidingView style={centerScreen.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-                <View style={centerScreen.innerContainer}>
+
+        <KeyboardAvoidingView style={authScreenStyles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                <View style={authScreenStyles.innerContainer}>
                     <Text style={authScreenStyles.text}>Login</Text>
                     <LoginForm onSubmit={onSubmit}/>
-                    <Button color={GlobalStyles.colors.primary200} title="Sign up" onPress={() => navigation.navigate("Register")}/>
+                    <Button color={GlobalStyles.colors.primary200} title="Sign up"
+                            onPress={() => navigation.navigate("Register")}/>
                 </View>
-            </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+
     )
 }
 

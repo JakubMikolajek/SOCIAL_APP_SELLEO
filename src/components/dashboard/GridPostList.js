@@ -6,13 +6,12 @@ import SingleGridItem from "./SingleGridItem";
 const GridPostList = ({userId}) => {
 
     const {isLoading, data} = useQuery(['posts'], () => getPostsData())
+    const post = data.data
+    const ownPost = post.filter((post) => post.creator_uuid === userId)
 
     if (isLoading) {
         return null
     }
-
-    const post = data.data
-    const ownPost = post.filter((post) => post.creator_uuid === userId)
 
     const renderPost = (itemData) => {
         const item = itemData.item
