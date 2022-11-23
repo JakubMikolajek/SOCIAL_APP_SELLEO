@@ -5,8 +5,23 @@ export const getPostsData = async () => await client
     .select("id, created_at, creator_uuid, description, image_url, comments ( body, creator_uuid, id )")
     .is("archived_at", null)
 
+export const createPost = async (description, imageUrl) => await client
+    .from("posts")
+    .insert({
+        description: description,
+        image_url: imageUrl,
+    })
+    .limit(1)
+    .single();
 
-export const addComment = async(postId, body) => {
+export const deleteOwnPost = async (postId) => await client
+    .from("posts")
+    .update({
+        archived_at: new Date().toISOString(),
+    })
+    .eq("id", postId);
+
+export const addComment = async (postId, body) => {
     return await client
         .from("comments")
         .insert({
@@ -17,6 +32,6 @@ export const addComment = async(postId, body) => {
         .single();
 }
 
-export const deleteComment = async(id) => {
+export const deleteComment = async (id) => {
     return await client.from("comments").delete().eq("id", id);
 }

@@ -10,13 +10,13 @@ const RegisterScreen = ({navigation}) => {
     const authCtx = useContext(AuthContext)
     const onSubmit = (data) => {
         authCtx.register(data.email, data.password)
-        navigation.navigate("Login")
+        navigation.goBack()
     }
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <KeyboardAvoidingView style={centerScreen.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-                <View style={centerScreen.container}>
+                <View style={centerScreen.innerContainer}>
                     <Text style={authScreenStyles.text}>Register</Text>
                     <RegisterForm onSubmit={onSubmit}/>
                 </View>

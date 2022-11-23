@@ -1,21 +1,20 @@
-import {Button, StyleSheet, View, Dimensions, Switch, ActivityIndicator} from 'react-native'
-import {useContext, useState} from "react";
+import {Button, StyleSheet, View, Dimensions, ActivityIndicator, Text} from 'react-native'
+import {useContext} from "react";
 import {AuthContext} from "../store/auth-context";
 import Avatar from "../components/profile/Avatar";
 import {useQuery} from "@tanstack/react-query"
 import {getCurrentUser} from "../helpers/userDataHelpers";
-import GridPostListAlt from "../components/profile/GridPostListAlt";
-import OwnPostsListAlt from "../components/dashboard/postsList/OwnPostsListAlt";
 import {GlobalStyles} from "../constants/GlobalStyles";
+import {SafeAreaView} from "react-native-safe-area-context";
+import GridPostList from "../components/profile/GridPostList";
+import Loader from "../components/UI/Loader";
 
 const windowWidth = Dimensions.get("window").width
 const windowHeight = Dimensions.get("window").height
 
 const OwnProfileScreen = ({navigation}) => {
-    const [enable, setEnable] = useState(false)
-    const toggleSwitch = () => setEnable(prevState => !prevState)
     const authCtx = useContext(AuthContext)
-    const {isLoading, data } = useQuery(['loginUser'], () => getCurrentUser(authCtx.ownId));
+    const {isLoading, data} = useQuery(['loginUser'], () => getCurrentUser(authCtx.ownId));
     const userData = data?.data;
 
     const logoutHandler = () => {
@@ -26,34 +25,31 @@ const OwnProfileScreen = ({navigation}) => {
         navigation.navigate("UpadateData")
     }
 
-    if(isLoading) {
-        return <ActivityIndicator  size="large" color={GlobalStyles.colors.primary100}/>
+    if (isLoading) {
+        return <Loader/>
     }
     return (
-        <View style={styles.container}>
-            <View>
+        <SafeAreaView style={{flex: 1}}>
+            <View style={{flex: 3}}>
                 <Avatar name={userData.first_name} surname={userData.last_name} imageUrl={userData.image_url}/>
                 <View style={styles.buttonContainer}>
                     <Button color={GlobalStyles.colors.primary200} title="Logout" onPress={logoutHandler}/>
                 </View>
                 <View style={styles.buttonContainerAlt}>
-                    <Button style={styles.button} color={GlobalStyles.colors.primary100} title="Edit profile" onPress={editProfileHandler}/>
+                    <Button style={styles.button} color={GlobalStyles.colors.primary100} title="Edit profile"
+                            onPress={editProfileHandler}/>
                 </View>
             </View>
-            <View style={styles.gridContainer}>
-                <Switch trackColor={{false: GlobalStyles.colors.primary100, true: GlobalStyles.colors.primary200}} thumbColor={enable ? GlobalStyles.colors.primary100 : GlobalStyles.colors.primary200} onValueChange={toggleSwitch} value={enable} style={{left:120}}/>
-                {!enable ? <GridPostListAlt/> : <OwnPostsListAlt/>}
+            <View style={{flex: 4, alignItems: "center"}}>
+                <GridPostList userId={authCtx.ownId}/>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 
 export default OwnProfileScreen
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 100,
-    },
     buttonContainer: {
         marginTop: 20,
         alignSelf: "center",
@@ -64,12 +60,12 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         width: 150
     },
-    gridContainer:{
+    gridContainer: {
         bottom: 40,
-        marginTop:20,
-        alignItems:"center",
+        marginTop: 10,
+        alignItems: "center",
         width: windowWidth,
-        height: windowHeight/2
+        height: windowHeight * 0.55
     }
 
 })

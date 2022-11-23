@@ -7,7 +7,6 @@ const CommentsList = ({comments}) => {
 
     const renderComments = (itemData) => {
         const item = itemData.item
-        console.log(item.id)
 
         const commentProps = {
             body: item.body,

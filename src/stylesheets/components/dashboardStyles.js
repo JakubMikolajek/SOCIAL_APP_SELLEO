@@ -6,11 +6,7 @@ const windowHeight = Dimensions.get("window").height
 
 export const dashboardStyles = StyleSheet.create({
     singlePost: {
-        form:{
-            marginBottom: 80
-        },
         container: {
-            flex: 1,
             alignItems: 'center',
             width: windowWidth,
             borderBottomWidth: 1,
@@ -36,10 +32,10 @@ export const dashboardStyles = StyleSheet.create({
     },
     singleUser: {
         form:{
-            alignSelf: "flex-start"
+            alignSelf: "flex-start",
+            flex:1
         },
         container: {
-            marginBottom: 10,
             width: 70,
             height: 80,
             justifyContent: "center",

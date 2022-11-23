@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import {centerScreen} from "../stylesheets/CenterScreen";
 import {useNavigation} from "@react-navigation/native";
-import DataForm from "../components/forms/DataForm";
+import EditDataForm from "../components/forms/EditDataForm";
 import {useContext} from "react";
 import {AuthContext} from "../store/auth-context";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
@@ -43,7 +43,7 @@ const EditUserDataScreen = () => {
             <KeyboardAvoidingView style={centerScreen.container}
                                   behavior={Platform.OS === "ios" ? "padding" : "height"}>
                 <View style={centerScreen.container}>
-                    <DataForm onSubmit={onSubmit}/>
+                    <EditDataForm onSubmit={onSubmit}/>
                 </View>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>

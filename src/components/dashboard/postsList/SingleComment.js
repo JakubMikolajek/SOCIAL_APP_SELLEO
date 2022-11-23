@@ -36,7 +36,7 @@ const SingleComment = ({body, creatorId, id}) => {
     return (
         <View style={styles.container}>
             <View style={styles.container}>
-                <Image style={styles.image} source={user.image_url ? {uri: user.image_url}: require("../../../../DUMMY_DATA/profile-logo.png")}/>
+                <Image style={styles.image} source={user.image_url ? {uri: user.image_url}: require("../../../constants/profile-logo.png")}/>
                 <Text>{user.first_name}: </Text>
                 <Text>{body}</Text>
             </View>

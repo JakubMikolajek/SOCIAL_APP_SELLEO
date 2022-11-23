@@ -1,33 +1,40 @@
-import {Button, Text, View, Image} from 'react-native'
-import * as ImagePicker from 'expo-image-picker';
+import {Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View} from 'react-native'
+import {SafeAreaView} from "react-native-safe-area-context";
 import {centerScreen} from "../stylesheets/CenterScreen";
-import {useState} from "react";
+import CreatePostForm from "../components/forms/CreatePostForm";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {createPost} from "../helpers/postDataHelpers";
 
-const CreatePostScreen = () => {
-    const [image,setImage] = useState(null)
-
-    const pickImage = async() => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        })
-
-        console.log(result)
-
-        if(!result.canceled){
-            setImage(result.assets[0].uri)
+const CreatePostScreen = ({navigation}) => {
+    const client = useQueryClient()
+    const mutation = useMutation({
+        mutationFn: data => {
+            return createPost(data.description, data.imageUrl)
+        },
+        onError: () => {
+            console.log('onError')
+        },
+        onSuccess: async () => {
+            await client.invalidateQueries((['posts']))
         }
+    })
+
+    const onSubmit = (data) => {
+        mutation.mutate(data)
+        navigation.navigate("OwnProfile")
     }
+
     return (
-        <View style={centerScreen.container}>
-            <Text>CreatePostScreen</Text>
-            <View>
-                <Button title="Get Image" onPress={pickImage}/>
-                {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-            </View>
-        </View>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <KeyboardAvoidingView style={centerScreen.container}
+                                  behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                <SafeAreaView>
+                    <View style={centerScreen.container}>
+                        <CreatePostForm onSubmit={onSubmit}/>
+                    </View>
+                </SafeAreaView>
+            </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
     )
 }
 

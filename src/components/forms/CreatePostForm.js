@@ -1,31 +1,32 @@
 import {Button, StyleSheet, View} from 'react-native'
 import {useForm} from "react-hook-form";
-import InputController from "./InputController";
-
 import {formsStyles} from "../../stylesheets/components/formsStyles";
+import InputController from "./InputController";
 import {GlobalStyles} from "../../constants/GlobalStyles";
+import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
+import * as yup from "yup";
 
-const DataForm = ({onSubmit}) => {
-    const {control, handleSubmit, formState: {errors}} = useForm({
+const validation = yup.object().shape({
+    description: yup.string().required("Description is required"),
+});
+
+const CreatePostForm = ({onSubmit}) => {
+    const {control, handleSubmit, formState: {errors}, reset} = useForm({
+        resolver: yupResolver(validation),
         defaultValues: {
-            name: "",
-            surname: "",
+            description: "",
             imageUrl: ""
         }
     })
+
+
     return (
         <View style={formsStyles.container}>
             <InputController
                 control={control}
-                name="name"
-                placeholder="Name"
-                errors={errors.name}
-            />
-            <InputController
-                control={control}
-                name="surname"
-                placeholder="Surname"
-                errors={errors.surname}
+                name="description"
+                placeholder="Description"
+                errors={errors.description}
             />
             <InputController
                 control={control}
@@ -34,12 +35,12 @@ const DataForm = ({onSubmit}) => {
                 errors={errors.imageUrl}
             />
             <View style={formsStyles.buttonContainer}>
-                <Button color={GlobalStyles.colors.primary200} title="Update" onPress={handleSubmit(onSubmit)}/>
+                <Button color={GlobalStyles.colors.primary200} title="Create Post" onPress={handleSubmit(onSubmit)}/>
             </View>
         </View>
     )
 }
 
-export default DataForm
+export default CreatePostForm
 
 const styles = StyleSheet.create({})

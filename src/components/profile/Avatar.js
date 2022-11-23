@@ -4,7 +4,7 @@ import {GlobalStyles} from "../../constants/GlobalStyles";
 const Avatar = ({name, surname, imageUrl}) => {
     return (
         <View style={styles.container}>
-            <Image style={styles.image} source={imageUrl ? {uri: imageUrl}: require("../../../DUMMY_DATA/profile-logo.png")}/>
+            <Image style={styles.image} source={imageUrl ? {uri: imageUrl}: require("../../constants/profile-logo.png")}/>
             <Text style={styles.text}>{name ? name : "Name"} {surname ? surname : "Surname"}</Text>
         </View>
     )

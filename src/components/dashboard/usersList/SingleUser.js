@@ -7,7 +7,7 @@ const SingleUser = ({name, surname, imageUrl,onPress}) => {
                    onPress={onPress}>
             <View style={dashboardStyles.singleUser.container}>
                 <View>
-                    <Image style={dashboardStyles.singleUser.image} source={imageUrl ? { uri: imageUrl } : require("../../../../DUMMY_DATA/profile-logo.png")}/>
+                    <Image style={dashboardStyles.singleUser.image} source={imageUrl ? { uri: imageUrl } : require("../../../constants/profile-logo.png")}/>
                 </View>
                 <Text style={dashboardStyles.singleUser.text}>{name ? name : "Name"}</Text>
                 <Text style={dashboardStyles.singleUser.text}>{surname ? surname : "Surname"}</Text>

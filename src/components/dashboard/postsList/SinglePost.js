@@ -29,7 +29,7 @@ const SinglePost = ({creatorId, id, imageUrl, likes}) => {
                     </View>
                 </Pressable>
                 <Text>{likes ? likes : "0"} likes</Text>
-                <Text>Somebody - add later</Text>
+                <Text>Last comment:</Text>
             </View>
         </View>
     )

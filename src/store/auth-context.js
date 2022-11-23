@@ -1,6 +1,5 @@
 import {createContext, useState} from "react";
 import {client} from "../utils/supabase";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext({
     isAuth: false,
@@ -15,27 +14,26 @@ export const AuthContext = createContext({
 
 const AuthContextProvider = ({children}) => {
     const [isAuth, setIsAuth] = useState(false)
-    const [ownId, setOwnId] = useState("")
+    const [ownId, setOwnId] = useState(null)
 
     const login = async (email, password) => {
-        const response = await client.auth.signInWithPassword({
+        return await client.auth.signInWithPassword({
             email: email,
             password: password,
-        });
-        await setOwnId(response.data.user.id)
-        if (ownId !== "") {
-            await setIsAuth(true)
-        }
-
+        }).then((response) => {
+            setOwnId(response.data.user.id)
+            setIsAuth(true)
+        })
     }
 
     const logout = async () => {
-        const response = await client.auth.signOut()
-        setIsAuth(false)
+        return await client.auth.signOut().then(() => {
+            setIsAuth(false)
+        })
     }
 
     const register = async (email, password) => {
-        const response = await client.auth.signUp({
+        await client.auth.signUp({
             email: email,
             password: password,
         });
@@ -43,10 +41,10 @@ const AuthContextProvider = ({children}) => {
 
     const value = {
         isAuth: isAuth,
+        ownId: ownId,
         login,
         logout,
         register,
-        ownId: ownId
     }
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
