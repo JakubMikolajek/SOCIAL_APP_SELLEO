@@ -1,36 +1,36 @@
 import {Image, StyleSheet, Text, View} from 'react-native'
-import {DUMMY_DATA, DUMMY_POST} from "../../DUMMY_DATA/dummy-data"
 import SingleUser from "../components/dashboard/usersList/SingleUser";
-import {useQueryClient} from "@tanstack/react-query";
+import {useQuery} from "@tanstack/react-query";
+import {getUsersData} from "../helpers/userDataHelpers";
+import {getPostsData} from "../helpers/postDataHelpers";
 
 const PostDetailScreen = ({navigation, route}) => {
-    const queryClient = useQueryClient()
-    const userData ={
-        name: route.params.userData.userName,
-        surname: route.params.userData.userSurname,
-        image: route.params.userData.userImg,
-        uuid: route.params.userData.userUuid
-    }
     const postId = route.params.postId
-    const posts = queryClient.getQueryData(['posts'])
-    const postsData = posts.data
-    const post = postsData.find((post) => post.id === postId)
+    const creatorId = route.params.creatorId
+
+    const {data: postData} = useQuery(['posts'], () => getPostsData(), {enabled: false});
+    const {data: userData} = useQuery(['users'], () => getUsersData(), {enabled: false});
+    const posts = postData.data
+    const users = userData.data
+    const singlePost = posts.find((post) => post.id === postId)
+    const postOwner = users.find((user) => user.uuid === creatorId)
+
 
     const pressHandler = () => {
         navigation.navigate("Profile", {
-            userId: userData.uuid
+            userId: postOwner.uuid
         })
     }
 
     return (
         <View style={styles.container}>
-            <Image style={styles.image} source={{uri: post.image_url}}/>
+            <Image style={styles.image} source={{uri: singlePost.image_url}}/>
             <View style={styles.innerContainer}>
-                <SingleUser name={userData.name} surname={userData.surname} imageUrl={userData.image}
+                <SingleUser name={postOwner.first_name} surname={postOwner.last_name} imageUrl={postOwner.image_url}
                             onPress={pressHandler}/>
                 <View>
                     <Text> likes</Text>
-                    <Text>Title: {post.description}</Text>
+                    <Text>Title: {singlePost.description}</Text>
                 </View>
             </View>
             <View>
@@ -55,11 +55,11 @@ const styles = StyleSheet.create({
         marginTop: 90,
         alignItems: "center"
     },
-    innerContainer:{
+    innerContainer: {
         flexDirection: "row",
-        alignSelf:"flex-start",
+        alignSelf: "flex-start",
         marginLeft: 20,
         marginTop: 10,
-        alignItems:"center"
+        alignItems: "center"
     }
 })

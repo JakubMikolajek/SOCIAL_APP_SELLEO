@@ -1,4 +1,4 @@
-import {Button, StyleSheet, View, Dimensions, Switch, Text} from 'react-native'
+import {Button, StyleSheet, View, Dimensions, Switch, ActivityIndicator} from 'react-native'
 import {useContext, useState} from "react";
 import {AuthContext} from "../store/auth-context";
 import Avatar from "../components/profile/Avatar";
@@ -28,7 +28,7 @@ const OwnProfileScreen = ({navigation}) => {
     }
 
     if(isLoading) {
-        return null
+        return <ActivityIndicator  size="large" color={GlobalStyles.colors.primary100}/>
     }
     return (
         <View style={styles.container}>
