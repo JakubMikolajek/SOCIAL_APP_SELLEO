@@ -7,7 +7,7 @@ import {dashboardStyles} from "../../stylesheets/components/dashboardStyles";
 const SinglePost = ({creatorId, id, imageUrl, comments}) => {
     const navigation = useNavigation()
 
-    const {data: userData} = useQuery(['users'], () => getUsersData(), {enabled:false});
+    const {data: userData} = useQuery(['users'], () => getUsersData(), {enabled: false});
     const users = userData.data
     const postOwner = users.find((user) => user.uuid === creatorId)
     const pressHandler = () => {
@@ -32,7 +32,7 @@ const SinglePost = ({creatorId, id, imageUrl, comments}) => {
                 </Pressable>
                 <View style={[dashboardStyles.singlePost.textContainer, dashboardStyles.singlePost.textContainerAlt]}>
                     <Text>likes</Text>
-                    <Text>Last comment: {comments ? comments.body : null}</Text>
+                    {comments ? <Text>Last comment: {comments.body}</Text> : null}
                 </View>
             </View>
         </View>

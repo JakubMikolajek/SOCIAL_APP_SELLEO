@@ -20,7 +20,7 @@ const SearchScreen = () => {
   return (
     <SafeAreaView>
         <SearchInput search={searchHandler}/>
-        <Button title="Search" onPress={sendPhoto}/>
+        <Button title="Search"/>
     </SafeAreaView>
   )
 }
