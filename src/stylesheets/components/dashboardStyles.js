@@ -36,6 +36,15 @@ export const dashboardStyles = StyleSheet.create({
         },
         pressed: {
             opacity: 0.5
+        },
+        row:{
+            flexDirection: "row",
+            justifyContent:"space-between"
+        },
+        likeContainer:{
+            alignItems:"center",
+            justifyContent:"center",
+            marginRight: 20
         }
     },
     singleUser: {
@@ -83,7 +92,8 @@ export const dashboardStyles = StyleSheet.create({
             borderColor: GlobalStyles.colors.primary200
         },
         pressed:{
-            opacity: 0.5
+            opacity: 0.5,
+            borderRadius:25
         }
     },
     gridPost:{

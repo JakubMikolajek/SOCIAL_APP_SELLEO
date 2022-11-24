@@ -2,36 +2,20 @@ import {FlatList, RefreshControl} from 'react-native'
 import SingleUser from "./SingleUser";
 import {useNavigation} from "@react-navigation/native";
 import {getUsersData} from "../../helpers/userDataHelpers";
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
+import {useQuery} from "@tanstack/react-query";
 import {dashboardStyles} from "../../stylesheets/components/dashboardStyles";
-import {useState} from "react";
+import {getPostsData} from "../../helpers/postDataHelpers";
 
 const UsersList = () => {
     const navigation = useNavigation()
-    const client = useQueryClient()
-    const [refresh, setRefresh] = useState(false)
-    const {isLoading, data} = useQuery(['users'], () => getUsersData());
+    const {isLoading, data, isRefetching: userRefetching, refetch: userRefetch} = useQuery(['users'], () => getUsersData(), {enabled: false});
+    const {isRefetching: postRefetching, refetch: postRefetch} = useQuery(['posts'], () => getPostsData(), {enabled: false})
     const users = data.data
 
-    const refreshMutation = useMutation({
-        mutationFn: () => {},
-        onError: () => {
-            console.log("onErrors")
-        },
-        onSuccess: async () => {
-            await client.invalidateQueries(
-                ['users']
-            )
-            await client.invalidateQueries(
-                ['posts']
-            )
-            setRefresh(false)
-        }
-    })
-
-    const refreshHandler = () => {
-        setRefresh(true)
-        refreshMutation.mutate()
+    const isRefetch = userRefetching || postRefetching
+    const refetch = () => {
+        userRefetch()
+        postRefetch()
     }
 
     if (isLoading) {
@@ -59,7 +43,7 @@ const UsersList = () => {
                   renderItem={renderUser} horizontal={true}
                   showsHorizontalScrollIndicator={false}
                   refreshControl={
-                      <RefreshControl refreshing={refresh} onRefresh={refreshHandler}/>
+                      <RefreshControl refreshing={isRefetch} onRefresh={refetch}/>
                   }/>
     )
 }

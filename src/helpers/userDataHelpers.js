@@ -1,4 +1,4 @@
-import {client} from "../utils/supabase";
+import {client} from "../supabase/supabase";
 
 export const getUsersData = async() => await client.from("users").select()
 

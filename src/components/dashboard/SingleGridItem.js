@@ -2,13 +2,14 @@ import {Image, Pressable, View} from 'react-native'
 import {useNavigation} from "@react-navigation/native";
 import {dashboardStyles} from "../../stylesheets/components/dashboardStyles";
 
-const SingleGridItem = ({creatorId, id, imageUrl}) => {
+const SingleGridItem = ({creatorId, id, imageUrl, likes}) => {
     const navigation = useNavigation()
 
     const pressHandler = () => {
         navigation.navigate("PostDetail", {
             postId: id,
-            creatorId: creatorId
+            creatorId: creatorId,
+            likes: likes
         })
     }
     return (

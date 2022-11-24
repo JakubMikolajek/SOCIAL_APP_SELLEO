@@ -16,10 +16,14 @@ const GridPostList = ({userId}) => {
     const renderPost = (itemData) => {
         const item = itemData.item
 
+        const countLikes = item.likes.length
+
         const postProps = {
             creatorId: item.creator_uuid,
             id: item.id,
             imageUrl: item.image_url,
+            likes: countLikes
+
         }
 
         return <SingleGridItem {...postProps} />

@@ -1,5 +1,5 @@
 import {createContext, useState} from "react";
-import {client} from "../utils/supabase";
+import {client} from "../supabase/supabase";
 
 export const AuthContext = createContext({
     isAuth: false,

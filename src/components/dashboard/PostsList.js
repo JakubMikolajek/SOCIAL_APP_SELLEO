@@ -9,8 +9,6 @@ const PostsList = () => {
 
     const post = postData.data
 
-    post.reverse()
-
     const renderPost = (itemData) => {
         const item = itemData.item
 
@@ -20,7 +18,8 @@ const PostsList = () => {
             creatorId: item.creator_uuid,
             id: item.id,
             imageUrl: item.image_url,
-            comments: lastComment
+            comments: lastComment,
+            likes: item.likes
         }
 
         return <SinglePost {...postProps}/>

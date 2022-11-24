@@ -24,9 +24,10 @@ const PostDetailScreen = ({navigation, route}) => {
     const authCtx = useContext(AuthContext)
     const postId = route.params.postId
     const creatorId = route.params.creatorId
+    const likes = route.params.likes
 
-    const {data: postData} = useQuery(['posts'], () => getPostsData(), {enabled: false});
-    const {data: userData} = useQuery(['users'], () => getUsersData(), {enabled: false});
+    const {data: postData} = useQuery(['posts'], () => getPostsData(), {enabled: false})
+    const {data: userData} = useQuery(['users'], () => getUsersData(), {enabled: false})
 
     const posts = postData.data
     const users = userData.data
@@ -87,7 +88,7 @@ const PostDetailScreen = ({navigation, route}) => {
                                     imageUrl={postOwner.image_url}
                                     onPress={pressHandler}/>
                         <View>
-                            <Text> likes</Text>
+                            <Text>{likes} likes</Text>
                             <Text>Title: {singlePost.description}</Text>
                         </View>
                         {authCtx ? <View style={postDetali.deleteBtnContainer}>
