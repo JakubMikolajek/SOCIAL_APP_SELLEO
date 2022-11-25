@@ -1,5 +1,6 @@
-import {createContext, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 import {client} from "../supabase/supabase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const AuthContext = createContext({
     isAuth: false,
@@ -16,13 +17,30 @@ const AuthContextProvider = ({children}) => {
     const [isAuth, setIsAuth] = useState(false)
     const [ownId, setOwnId] = useState(null)
 
+    useEffect(() => {
+        const isLoggedIn = async () => {
+            const token = await AsyncStorage.getItem("@seassonToken")
+            const id = await AsyncStorage.getItem("@userToken")
+
+            if(token && id){
+                setOwnId(id)
+                setIsAuth(true)
+            }
+        }
+        isLoggedIn()
+    },[])
+
     const login = async (email, password) => {
         return await client.auth.signInWithPassword({
             email: email,
             password: password,
-        }).then((response) => {
+        }).then(async(response) => {
             setOwnId(response.data.user.id)
             setIsAuth(true)
+            const seassonToken = JSON.stringify(response.data.session.access_token)
+            const userToken = JSON.stringify(response.data.user.id)
+            await AsyncStorage.setItem("@seassonToken", seassonToken)
+            await AsyncStorage.setItem("@userToken", userToken)
         })
     }
 
