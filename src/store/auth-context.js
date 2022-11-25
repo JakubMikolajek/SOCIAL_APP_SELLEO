@@ -18,7 +18,7 @@ const AuthContextProvider = ({children}) => {
     const [ownId, setOwnId] = useState(null)
 
     useEffect(() => {
-        const isLoggedIn = async () => {
+            const isLoggedIn = async () => {
             const seassonToken = await AsyncStorage.getItem("@seassonToken")
             const userToken = await AsyncStorage.getItem("@userToken")
             const token = JSON.parse(seassonToken)
@@ -47,8 +47,9 @@ const AuthContextProvider = ({children}) => {
     }
 
     const logout = async () => {
-        return await client.auth.signOut().then(() => {
+        return await client.auth.signOut().then(async () => {
             setIsAuth(false)
+            await AsyncStorage.clear()
         })
     }
 

@@ -4,7 +4,7 @@ export const getUsersData = async() => await client.from("users").select()
 
 export const getCurrentUser =  async(ownId) => await client
     .from("users")
-    .select()
+    .select("*")
     .eq("uuid", ownId)
     .single()
 
