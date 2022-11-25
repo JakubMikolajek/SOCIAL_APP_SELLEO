@@ -19,8 +19,10 @@ const AuthContextProvider = ({children}) => {
 
     useEffect(() => {
         const isLoggedIn = async () => {
-            const token = await AsyncStorage.getItem("@seassonToken")
-            const id = await AsyncStorage.getItem("@userToken")
+            const seassonToken = await AsyncStorage.getItem("@seassonToken")
+            const userToken = await AsyncStorage.getItem("@userToken")
+            const token = JSON.parse(seassonToken)
+            const id = JSON.parse(userToken)
 
             if(token && id){
                 setOwnId(id)
