@@ -29,11 +29,11 @@ const PostDetailScreen = ({navigation, route}) => {
     const {data: postData} = useQuery(['posts'], () => getPostsData(), {enabled: false})
     const {data: userData} = useQuery(['users'], () => getUsersData(), {enabled: false})
 
-    const posts = postData.data
-    const users = userData.data
+    const postsData = postData.data
+    const usersData = userData.data
 
-    const singlePost = posts.find((post) => post.id === postId)
-    const postOwner = users.find((user) => user.uuid === creatorId)
+    const singlePost = postsData.find((post) => post.id === postId)
+    const postOwner = usersData.find((user) => user.uuid === creatorId)
 
     const comments = singlePost.comments
 

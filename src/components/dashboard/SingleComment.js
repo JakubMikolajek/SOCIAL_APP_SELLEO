@@ -13,8 +13,8 @@ const SingleComment = ({body, creatorId, id}) => {
     const authCtx = useContext(AuthContext)
     const commentId = id
     const {data: userData} = useQuery(['users'], () => getUsersData(), {enabled: false});
-    const users = userData.data
-    const user = users.find((user) => user.uuid === creatorId)
+    const usersData = userData.data
+    const user = usersData.find((user) => user.uuid === creatorId)
 
 
     const mutation = useMutation({

@@ -14,9 +14,9 @@ const ProfileScreen = ({route}) => {
     const toggleSwitch = () => setEnable(prevState => !prevState)
 
     const userId = route.params.userId
-    const {data: usersData} = useQuery(['users'], () => getUsersData());
-    const users = usersData.data
-    const user = users.find((user) => user.uuid === userId)
+    const {data: userData} = useQuery(['users'], () => getUsersData());
+    const usersData = userData.data
+    const user = usersData.find((user) => user.uuid === userId)
 
     return (
         <SafeAreaView style={profileScreen.container}>

@@ -1,4 +1,3 @@
-import SearchInput from "../components/search/SearchInput";
 import {SafeAreaView} from "react-native-safe-area-context";
 import {useState} from "react";
 import {useQuery} from "@tanstack/react-query";

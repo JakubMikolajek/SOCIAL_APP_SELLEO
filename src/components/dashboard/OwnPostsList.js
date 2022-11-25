@@ -13,9 +13,9 @@ const OwnPostsList = ({userId}) => {
         return <ActivityIndicator  size="large" color={GlobalStyles.colors.primary100}/>
     }
 
-    const post = postData.data
+    const postsData = postData.data
 
-    const ownPost = post.filter((post) => post.creator_uuid === userId)
+    const ownPost = postsData.filter((post) => post.creator_uuid === userId)
 
     const renderPost = (itemData) => {
         const item = itemData.item

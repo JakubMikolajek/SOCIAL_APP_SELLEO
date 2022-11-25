@@ -15,8 +15,8 @@ const SinglePost = ({creatorId, id, imageUrl, comments, likes}) => {
     const authCtx = useContext(AuthContext)
 
     const {data: userData} = useQuery(['users'], () => getUsersData(), {enabled: false})
-    const users = userData.data
-    const postOwner = users.find((user) => user.uuid === creatorId)
+    const usersData = userData.data
+    const postOwner = usersData.find((user) => user.uuid === creatorId)
     const countLikes = likes.length
     const ownLike = likes.find((like) => like.creator_uuid === authCtx.ownId)
 
